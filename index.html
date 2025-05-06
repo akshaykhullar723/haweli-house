@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Haweli House</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #f9f2e5;
+      font-family: 'Cinzel', serif;
+    }
+
+    #gate-wrapper {
+      width: 100%;
+      height: 100%;
+      perspective: 1600px;
+      perspective-origin: 50% 50%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .door {
+      position: absolute;
+      width: 50vw;
+      height: 100%;
+      top: 0;
+      transition: transform 3.5s cubic-bezier(0.77, 0.2, 0.2, 1);
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      z-index: 2;
+    }
+
+    .door.left {
+      background: url('left.jpg') no-repeat center center;
+      background-size: cover;
+      transform-origin: left center;
+      left: 0;
+    }
+
+    .door.right {
+      background: url('right.jpg') no-repeat center center;
+      background-size: cover;
+      transform-origin: right center;
+      right: 0;
+    }
+
+    .door .knob {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background: radial-gradient(circle, #ffd700, #b8860b);
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+      box-shadow: 0 0 5px rgba(0,0,0,0.3);
+      z-index: 3;
+    }
+
+    .door.left .knob {
+      right: 20px;
+    }
+
+    .door.right .knob {
+      left: 20px;
+    }
+
+    #gate-message {
+      position: absolute;
+      top: 35%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5rem;
+      color: #69ffdf;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 3px solid rgba(255,215,0,0.75);
+      width: 0ch;
+      animation: typing 3s steps(38) 0.5s forwards, blink 0.75s step-end infinite;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+      z-index: 3;
+    }
+
+    @keyframes typing {
+      to { width: 38ch; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    #gate-wrapper.open #gate-message {
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    #content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      opacity: 0;
+      z-index: 1;
+      transition: opacity 2s ease 1s;
+    }
+
+    #content h1 {
+      font-size: 3rem;
+      color: #4c2e01;
+      margin-bottom: 1rem;
+    }
+
+    #content p {
+      font-size: 1.5rem;
+      color: #5d3a00;
+    }
+
+    #gate-wrapper.open .door.left {
+      transform: rotateY(-110deg);
+    }
+
+    #gate-wrapper.open .door.right {
+      transform: rotateY(110deg);
+    }
+
+    #gate-wrapper.open #content {
+      opacity: 1;
+    }
+
+    @media (max-width: 600px) {
+      #gate-message {
+        font-size: 1.6rem;
+        animation: typing 3s steps(38) 0.5s forwards, blink 0.75s step-end infinite;
+      }
+
+      #content h1 {
+        font-size: 2rem;
+      }
+
+      #content p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="gate-wrapper">
+    <!-- Doors -->
+    <div class="door left">
+      <div class="knob"></div>
+    </div>
+    <div class="door right">
+      <div class="knob"></div>
+    </div>
+
+    <!-- Typing welcome message -->
+    <div id="gate-message">The Haweli Gates Are Opening for You...</div>
+
+    <!-- Main content -->
+    <div id="content">
+      <h1>Welcome to Haweli House</h1>
+      <p>Royal dining experience awaits you.</p>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('gate-wrapper').classList.add('open');
+      }, 4500);
+    });
+  </script>
+
+</body>
+</html>

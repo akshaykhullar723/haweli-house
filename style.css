@@ -1,0 +1,98 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    font-family: 'Georgia', serif;
+    background-color: #f8f1e4;
+  }
+  
+  /* Gate Container */
+  .gate-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    z-index: 9999;
+  }
+  
+  /* Each Gate */
+  .gate {
+    flex: 1;
+    background-color: #5a3e2b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 2s ease;
+    position: relative;
+  }
+  
+  .left-gate {
+    transform-origin: left center;
+  }
+  
+  .right-gate {
+    transform-origin: right center;
+  }
+  
+  /* Text on Gate */
+  .gate-text {
+    color: #fff8dc;
+    font-size: 3rem;
+    font-weight: bold;
+    pointer-events: none;
+    user-select: none;
+  }
+  
+  /* Animation Trigger */
+  .gate-container.open .left-gate {
+    transform: translateX(-100%);
+  }
+  
+  .gate-container.open .right-gate {
+    transform: translateX(100%);
+  }
+  
+  /* Website Content */
+  .content {
+    position: relative;
+    z-index: 1;
+    height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+  }
+  
+  .content.show {
+    opacity: 1;
+  }
+  
+  .content h1 {
+    font-size: 3rem;
+    color: #5a3e2b;
+  }
+  
+  .content p {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    color: #3e2c23;
+  }
+  
+  .highlight {
+    color: #a0522d;
+    font-style: italic;
+  }
+  
